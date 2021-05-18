@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+                      name="service-root"
+                      xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0">
+
+  <requiredProperties>
+    <requiredProperty key="serviceName"></requiredProperty>
+    <requiredProperty key="servicePrefix">
+      <defaultValue>foo</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="servicePrefixUpper">
+      <defaultValue>FOO</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="classNamePrefix">
+      <defaultValue>${artifactId.substring(0,1).toUpperCase()}${artifactId.substring(1).toLowerCase()}</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+
+  <fileSets>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.gitignore</include>
+        <include>README.md</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+
+  <modules>
+    <module id="${rootArtifactId}-parent" dir="parent" name="parent" />
+
+    <module id="${rootArtifactId}-domain" dir="domain" name="domain">      
+      <fileSets>
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+          <directory>src/test/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+
+    <module id="${rootArtifactId}-service" dir="service" name="service">
+      <modules>
+        <module id="${rootArtifactId}-service-api" dir="api" name="service-api">
+          <fileSets>
+            <fileSet filtered="true" packaged="true" encoding="UTF-8">
+              <directory>src/main/java</directory>
+              <includes>
+                <include>**/*.java</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+        </module>
+        <module id="${rootArtifactId}-service-impl" dir="impl" name="service-impl">
+        <fileSets>
+          <fileSet filtered="true" packaged="true" encoding="UTF-8">
+            <directory>src/main/java</directory>
+            <includes>
+              <include>**/*.java</include>
+            </includes>
+          </fileSet>
+          <fileSet filtered="true" packaged="true" encoding="UTF-8">
+            <directory>src/test/java</directory>
+            <includes>
+              <include>**/*.java</include>
+            </includes>
+          </fileSet>
+        </fileSets>
+        </module>
+      </modules>
+    </module>
+
+    <module id="${rootArtifactId}-gateway" dir="gateway" name="gateway">
+      <modules>
+        <module id="${rootArtifactId}-gateway-endpoint" dir="endpoint" name="gateway-endpoint">
+          <modules>
+            <module id="${rootArtifactId}-gateway-endpoint-rest" dir="rest" name="gateway-endpoint-rest">
+              <fileSets>
+                <fileSet filtered="true" packaged="true" encoding="UTF-8">
+                  <directory>src/main/java</directory>
+                  <includes>
+                    <include>**/*.java</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+          </modules>
+        </module>
+        <module id="${rootArtifactId}-gateway-provider" dir="provider" name="gateway-provider">
+          <modules>
+            <module id="${rootArtifactId}-gateway-provider-thirdparty" dir="thirdparty" name="gateway-provider-thirdparty" />
+          </modules>
+        </module>
+      </modules>
+    </module>
+
+    <module id="${rootArtifactId}-service-rest-launcher" dir="launcher" name="launcher">
+    <fileSets>
+      <fileSet filtered="true" packaged="true" encoding="UTF-8">
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.java</include>
+        </includes>
+      </fileSet>
+      <fileSet filtered="true" packaged="true" encoding="UTF-8">
+        <directory>src/test/java</directory>
+        <includes>
+          <include>**/*.java</include>
+        </includes>
+      </fileSet>
+    </fileSets>
+    </module>
+  </modules>
+</archetype-descriptor>

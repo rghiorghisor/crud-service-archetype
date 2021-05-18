@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}-root</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <artifactId>${artifactId}</artifactId>
+    <packaging>pom</packaging>
+    <name>${servicePrefixUpper} :: ${serviceName} :: Parent</name>
+
+    <dependencies>      
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-aop</artifactId>
+      </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+      <dependencies>           
+        <!-- Domain -->
+        <dependency>
+          <groupId>${groupId}</groupId>
+          <artifactId>${rootArtifactId}-domain</artifactId>
+          <version>${project.version}</version>
+        </dependency>           
+
+        <!-- Service -->
+        <dependency>
+          <groupId>${groupId}</groupId>
+          <artifactId>${rootArtifactId}-service-api</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${groupId}</groupId>
+          <artifactId>${rootArtifactId}-service-impl</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+
+        <!-- REST Api Gateway -->
+        <dependency>
+          <groupId>${groupId}</groupId>
+          <artifactId>${rootArtifactId}-gateway-endpoint</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${groupId}</groupId>
+          <artifactId>${rootArtifactId}-gateway-endpoint-rest</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+
+</project>
